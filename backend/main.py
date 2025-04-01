@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from database import engine
+from database import engine, Base
 import models
 from router import router
 
-models.base.metadata.vreate_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 app.include_router(router)

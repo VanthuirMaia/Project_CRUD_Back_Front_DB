@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from schemas import ProductUpdate, ProduteCreate
+from schemas import ProductUpdate, ProductCreate
 from models import ProductModel
 
 # get all (select * from)
@@ -11,7 +11,7 @@ def get_product(db: Session, product_id: int):
     return db.query(ProductModel).filter(ProductModel.id == product_id)
 
 # insert into (create)
-def create_product(db: Session, product: ProduteCreate):
+def create_product(db: Session, product: ProductCreate):
     db_product = ProductModel(**product.model_dump())
     db.add(db_product)
     db.commit()

@@ -1,4 +1,5 @@
-version: '3.8'
+version: "3.8"
+
 services:
   postgres:
     image: postgres:latest
@@ -11,6 +12,20 @@ services:
     networks:
       - mynetwork
 
+  backend:
+    build:
+      context: ./backend # Define o caminho do diretório onde o Dockerfile está
+      dockerfile: Dockerfile # Nome do Dockerfile
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres/mydatabase
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
